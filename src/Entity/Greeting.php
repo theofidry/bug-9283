@@ -7,11 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * This is a dummy entity. Remove it!
- *
  * @ORM\Entity
+ * @ApiResource()
  */
-#[ApiResource(mercure: true)]
 class Greeting
 {
     /**
@@ -19,9 +17,9 @@ class Greeting
      *
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="greeting_id")
      */
-    private ?int $id = null;
+    public GreetingId $id;
 
     /**
      * A nice person
@@ -31,8 +29,9 @@ class Greeting
      */
     public string $name = '';
 
-    public function getId(): ?int
+    public function __construct(GreetingId $id, string $name)
     {
-        return $this->id;
+        $this->id = $id;
+        $this->name = $name;
     }
 }

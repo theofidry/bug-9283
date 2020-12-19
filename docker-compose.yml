@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+    database:
+        image: postgres:13-alpine
+        environment:
+            - POSTGRES_DB=api
+            - POSTGRES_PASSWORD=!ChangeMe!
+            - POSTGRES_USER=api-platform
+        volumes:
+            - db_data:/var/lib/postgresql/data:rw
+            # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+            # - ./api/docker/db/data:/var/lib/postgresql/data:rw
+        ports:
+            - 8031:5432
+
+volumes:
+    db_data:
